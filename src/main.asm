@@ -5,16 +5,13 @@ extern prints
 _start:
 	
 	; Get argc and print help if it's only 1
-	pop rdi
-	pop rsi
+	mov rdi, [rsp + 8]
+	lea rsi, [rsp + 16]
 	mov qword [argc], rdi
 	mov qword [argv], rsi
 	cmp rdi, 1
 	je .print_help
 
-	mov rdi, [argc]
-	cmp rdi, 2
-	jl .bad
 	; Print the first argument
 	mov rbx, [argv]		; Get the pointer to the first string
 	mov rsi, [rsi]		; Get the start of the first string
